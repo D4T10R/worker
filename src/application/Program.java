@@ -1,9 +1,8 @@
-package application;
 
-import java.util.Scanner;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 import entities.Department;
 import entities.HourContract;
@@ -14,10 +13,12 @@ public class Program {
 
     public static void main(String[] args) {
 
+        // VARIAVEIS INCIALIZADAS
         Scanner sc = new Scanner(System.in);
         Department department = new Department();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
+    
+        // INFORMAÇÕES DO WORK
         System.out.print("Enter department's name: ");
         department.setName(sc.next());
         System.out.print("Enter worker data: ");
@@ -28,15 +29,18 @@ public class Program {
         System.out.print("Base salary: ");
         Double baseSalary = sc.nextDouble();
 
+        // INICIALIZANDO WORK
         Worker worker = new Worker(nameWorker, WorkerLevel.valueOf(level), baseSalary, department);
+
 
         System.out.println("How many contracts to this worker? ");
         int n = sc.nextInt();
 
+        // INFORMAÇÕES DO CONTRATO
         for (int i = 0; i < n; i++) {
             System.out.println();
             System.out.print("Date (DD/MM/YYYY): ");
-            Date contractDate = sdf.parse(sc.next());
+            Date contractDate = sdf.parse(sc.next(), null);
             System.out.println("Value per hour: ");
             Double valuePerHour = sc.nextDouble();
             System.out.println("Duration (Hours): ");
@@ -45,6 +49,7 @@ public class Program {
             worker.addContract(new HourContract(contractDate, valuePerHour, hours));
         }
 
+        // CALCULO FINAL DO SALARIO
         System.out.println("Enter month and year to calculate income (MM/YYYY): ");
         String incomeDate = sc.next();
         int month = Integer.parseInt(incomeDate.substring(0, 2));
@@ -52,6 +57,8 @@ public class Program {
         System.out.printf("Name: %s", worker.getName());
         System.out.printf("Department: %s", worker.getDepartment().getName());
         System.out.printf("Income for %d/%d: %.2f", month, year, worker.income(month, year));
+    
+    
     }
 
 }
