@@ -43,8 +43,7 @@ public class HourContract {
 
     // METODOS
     public Double totalValue() {
-        Double sum = valuePerHour * hours;
-        return sum;
+        return valuePerHour * hours;
     }
 
 }

@@ -1,12 +1,10 @@
 package entities;
 
-import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import entities_enum.WorkerLevel;
-import java.util.List;
-import java.util.Calendar;
-import java.util.ArrayList;
 
 
 public class Worker {
@@ -66,13 +64,13 @@ public class Worker {
         this.contracts.remove(contract);
     }
 
-    public Double income(Integer year, Integer month) {
+    public Double income(int year, int month) {
         Double sum = baseSalary;
         Calendar cal = Calendar.getInstance();
         for (HourContract c : contracts) {
             cal.setTime(c.getDate());
-            int c_month = cal.get(Calendar.MONTH);
-            int c_year = cal.get(Calendar.YEAR);
+            int c_month = 1 + cal.get(Calendar.MONTH);
+            int c_year =  cal.get(Calendar.YEAR);
             if (year == c_year && month == c_month) {
                 sum += c.totalValue();
             }
